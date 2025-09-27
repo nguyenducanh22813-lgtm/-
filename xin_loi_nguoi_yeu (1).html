@@ -1,0 +1,132 @@
+
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Xin lỗi Em</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: url('OIP (2).webp') no-repeat center center;
+      background-size: cover;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      text-align: center;
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      white-space: pre-line;
+      overflow: hidden;
+    }
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .yes { background: #ff6b81; color: #fff; }
+    .no { background: #fff; color: #ff6b81; position: relative; }
+    .no:hover { transform: translate(10px,-10px); }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: floatUp 4s ease-in infinite;
+    }
+    .heart:before,
+    .heart:after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+    .heart:before { top: -10px; left: 0; }
+    .heart:after { left: -10px; top: 0; }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-600px) rotate(45deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container">
+    <h1>Bé iu ơi, cho anh xin lỗi nhóooo 💖</h1>
+    <div class="buttons">
+      <button class="yes" id="btnYes">Chấp nhận</button>
+      <button class="no" id="btnNo">Không bao giờ</button>
+    </div>
+  </div>
+  <script>
+    const btnNo = document.getElementById('btnNo');
+    btnNo.addEventListener('mouseenter', () => {
+      const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
+      const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+      btnNo.style.left = x + 'px';
+      btnNo.style.top = y + 'px';
+      btnNo.style.position = 'absolute';
+    });
+
+    const btnYes = document.getElementById('btnYes');
+    btnYes.addEventListener('click', () => {
+      showApologyMessage();
+    });
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = window.innerHeight + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }
+    setInterval(createHeart, 300);
+
+    function showApologyMessage() {
+      const container = document.querySelector('.container');
+      container.innerHTML = `<h1 id="apologyText"></h1>`;
+      const message = "Anh xin lỗi vì tất cả những điều đã làm em buồn. Anh hứa sẽ yêu thương và trân trọng em nhiều hơn. 💖";
+      let i = 0;
+      function typeWriter() {
+        if (i < message.length) {
+          document.getElementById("apologyText").textContent += message.charAt(i);
+          i++;
+          setTimeout(typeWriter, 80);
+        }
+      }
+      typeWriter();
+    }
+  </script>
+</body>
+</html>
